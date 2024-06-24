@@ -11,7 +11,11 @@
             um.FemaleStudents();
             um.SortStudentByAge();
             um.AllStundentFromHsAugsburg();
+            um.StudentAndUniversityNameCollection();
 
+
+
+            /*
             string input = Console.ReadLine();
 
             try
@@ -29,6 +33,7 @@
 
 
             Console.ReadKey();
-        }
+        */
+            }
     }
 }

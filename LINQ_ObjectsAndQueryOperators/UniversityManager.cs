@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace LINQ_ObjectsAndQueryOperators
 {
 
-   
+
     class UniversityManager
     {
 
@@ -21,8 +21,8 @@ namespace LINQ_ObjectsAndQueryOperators
             students = new List<Student>();
 
             //Adding some universities
-            universities.Add(new University { Id = 001, Name ="Hochschule Augsburg" } ); 
-            universities.Add(new University { Id = 002, Name ="Hochschule Neu-Ulm" } );
+            universities.Add(new University { Id = 001, Name = "Hochschule Augsburg" });
+            universities.Add(new University { Id = 002, Name = "Hochschule Neu-Ulm" });
 
             // Adding some Stundents
 
@@ -44,7 +44,7 @@ namespace LINQ_ObjectsAndQueryOperators
             {
                 studentMale.print();
             }
-            
+
         }
 
 
@@ -53,7 +53,7 @@ namespace LINQ_ObjectsAndQueryOperators
             IEnumerable<Student> femaleStudents = from student in students where student.Gender == "Female" select student;
             Console.WriteLine("Female - Stundets: ");
 
-            foreach(Student female in femaleStudents)
+            foreach (Student female in femaleStudents)
             {
                 female.print();
 
@@ -68,9 +68,9 @@ namespace LINQ_ObjectsAndQueryOperators
         {
             var sortedStudents = from student in students orderby student.Age select student;
 
-            Console.WriteLine("Student sorted by Age:" );
+            Console.WriteLine("Student sorted by Age:");
 
-            foreach(Student student in sortedStudents) 
+            foreach (Student student in sortedStudents)
             {
                 student.print();
             }
@@ -87,21 +87,21 @@ namespace LINQ_ObjectsAndQueryOperators
 
 
             Console.WriteLine("Student from Hochschule Augsburg: ");
-            foreach(Student student in hsAuxStudents)
+            foreach (Student student in hsAuxStudents)
             {
                 student.print();
             }
-        
-        
+
+
         }
 
 
         public void allStundentFromSelectedUni(int Id)
         {
             IEnumerable<Student> myStudents = from student in students
-                                                 join university in universities on student.UniversityId equals university.Id
-                                                 where university.Id == Id
-                                                 select student;
+                                              join university in universities on student.UniversityId equals university.Id
+                                              where university.Id == Id
+                                              select student;
 
 
 
@@ -116,8 +116,28 @@ namespace LINQ_ObjectsAndQueryOperators
 
         }
 
+        // NEW FILTER FROM STUDENTS AND THEIR UNIVERSITIES.
+        public void StudentAndUniversityNameCollection()
+        {
+            var newCollection = from student in students
+                                join university in universities on student.UniversityId equals university.Id
+                                orderby student.Name
+                                select new { StudentName = student.Name, UniversityName = university.Name };
+
+            Console.WriteLine("New Collection: ");
+
+            foreach (var collection in newCollection)
+            {
+                Console.WriteLine($"Student {collection.StudentName}, {collection.UniversityName}");
 
 
 
+
+
+            }
+
+
+
+        }
     }
 }
