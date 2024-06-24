@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace LINQ_ObjectsAndQueryOperators
 {
-     class UniversityManager
+
+   
+    class UniversityManager
     {
 
         public List<University> universities;
@@ -24,12 +26,12 @@ namespace LINQ_ObjectsAndQueryOperators
 
             // Adding some Stundents
 
-            students.Add(new Student { Id = 0001, Name = "Carla", Gender = "Female", Age = 17, UniversityId = 1001 });
-            students.Add(new Student { Id = 0002, Name = "Toni", Gender = "male", Age = 21, UniversityId = 1001 });
-            students.Add(new Student { Id = 0003, Name = "Leyla", Gender = "Female", Age = 19, UniversityId = 2002 });
-            students.Add(new Student { Id = 0004, Name = "James", Gender = "male", Age = 25, UniversityId = 2002 });
-            students.Add(new Student { Id = 0005, Name = "Linda", Gender = "Female", Age = 22, UniversityId = 2002 });
-            students.Add(new Student { Id = 0005, Name = "Lora", Gender = "Dive", Age = 29, UniversityId = 2002 });
+            students.Add(new Student { Id = 1001, Name = "Carla", Gender = "Female", Age = 17, UniversityId = 001 });
+            students.Add(new Student { Id = 1002, Name = "Toni", Gender = "male", Age = 21, UniversityId = 001 });
+            students.Add(new Student { Id = 1002, Name = "Leyla", Gender = "Female", Age = 19, UniversityId = 002 });
+            students.Add(new Student { Id = 1003, Name = "James", Gender = "male", Age = 25, UniversityId = 002 });
+            students.Add(new Student { Id = 1004, Name = "Linda", Gender = "Female", Age = 22, UniversityId = 002 });
+            students.Add(new Student { Id = 1005, Name = "Lora", Gender = "Dive", Age = 29, UniversityId = 002 });
 
         }
 
@@ -56,6 +58,60 @@ namespace LINQ_ObjectsAndQueryOperators
                 female.print();
 
             }
+
+
+        }
+
+
+
+        public void SortStudentByAge()
+        {
+            var sortedStudents = from student in students orderby student.Age select student;
+
+            Console.WriteLine("Student sorted by Age:" );
+
+            foreach(Student student in sortedStudents) 
+            {
+                student.print();
+            }
+        }
+
+
+        public void AllStundentFromHsAugsburg()
+        {
+            IEnumerable<Student> hsAuxStudents = from student in students
+                                                 join university in universities on student.UniversityId equals university.Id
+                                                 where university.Name == "Hochschule Augsburg"
+                                                 select student;
+
+
+
+            Console.WriteLine("Student from Hochschule Augsburg: ");
+            foreach(Student student in hsAuxStudents)
+            {
+                student.print();
+            }
+        
+        
+        }
+
+
+        public void allStundentFromSelectedUni(int Id)
+        {
+            IEnumerable<Student> myStudents = from student in students
+                                                 join university in universities on student.UniversityId equals university.Id
+                                                 where university.Id == Id
+                                                 select student;
+
+
+
+            Console.WriteLine($"Student from Selected Uni: {Id} ");
+            foreach (Student student in myStudents)
+            {
+                student.print();
+            }
+
+
 
 
         }

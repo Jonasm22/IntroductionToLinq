@@ -1,23 +1,34 @@
 ﻿namespace LINQ_ObjectsAndQueryOperators
 {
-     class Program
+
+    //https://learn.microsoft.com/en-us/dotnet/csharp/linq/standard-query-operators/
+    class Program
     {
         static void Main(string[] args)
         {
-            UniversityManager um_males = new UniversityManager();
-            um_males.MaleStudents();
+            UniversityManager um = new UniversityManager();
+            um.MaleStudents();
+            um.FemaleStudents();
+            um.SortStudentByAge();
+            um.AllStundentFromHsAugsburg();
 
-            Console.WriteLine("----------------------");
+            string input = Console.ReadLine();
 
-            UniversityManager umFemls = new UniversityManager();
-            umFemls.FemaleStudents();
+            try
+            {
+                int inputAsInt = Convert.ToInt32(input);
+                um.allStundentFromSelectedUni(inputAsInt);
+
+            }
+
+            catch
+            {
+
+                Console.WriteLine("Error");
+            }
+
+
             Console.ReadKey();
         }
     }
-
-   
-
-
-
-
 }
